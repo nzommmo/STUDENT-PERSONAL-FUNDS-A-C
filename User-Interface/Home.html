@@ -1,12 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="Home.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
 </head>
 <body>
-    <p>WELCOME</p>
+    <header id="navbar">
+        <h1>STUDENT PERSONAL FUNDS A/C</h1>
+        <nav>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Transact</a></li>
+                <li><a href="">History</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    <div id="container">
+
+        <div id="details">
+            <label for="">Name: <span id="Name" class="info">ERIC</span></label><br>
+            <label for="">Admission No: <span id="Adm" class="info" >1052079</span></label><br>
+            <label for="">Account No: <span id="Acc" class="info">011078578993000</span></label><br>
+            <label for="">Balance: <span id="balance" class="info">Ksh 150,000</span></label>
+            <div id="buttons">
+                <button type="button" id="btn"><i class="fa-solid fa-eye-slash">
+                
+                </i></button>   
+                <button type="button" id="back"><i class="fa-solid fa-eye"></i></button>
+            </div>
+            
+        </div>
+    
+    </div>
+
+    <div id="container1">
+        <div id="options">
+            <button type="button" class="btn" data-target="payments" id="purchase">Purchase</button>
+            <button type="button" class="btn" data-target="withdrawals">Withdraw</button>
+        </div>
+    </div>
+    <div id="payments" data-target="payments">
+        <ul>
+            <li><a href="">Pay Bill</a></li>
+            <li><a href="">Till No</a></li>
+            <li><a href="">Pochi la Biashara</a></li>
+        </ul>
+    </div>
+    <div id="withdrawals">
+        <ul>
+            <li><a href="">From Agent</a></li>
+            <li><a href="">From Atm</a></li>
+        </ul>
+    </div>
     
 </body>
+<script src="Home.js"></script>
+<script src="https://kit.fontawesome.com/a13b48f8ce.js" crossorigin="anonymous"></script>
 </html>
