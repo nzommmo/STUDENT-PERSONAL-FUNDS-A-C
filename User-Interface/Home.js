@@ -73,3 +73,7 @@ function display(event){
 displaybuttons.forEach(button => {
     button.addEventListener("click",display)
 })
+
+function filter(){
+    //to filter dataa
+}
