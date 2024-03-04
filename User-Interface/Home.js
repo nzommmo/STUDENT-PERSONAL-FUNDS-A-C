@@ -76,4 +76,5 @@ displaybuttons.forEach(button => {
 
 function filter(){
     //to filter dataa
+    //on the main page
 }
