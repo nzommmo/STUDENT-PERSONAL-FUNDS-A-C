@@ -8,7 +8,7 @@ if (isset($_POST['register'])) {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash password
     $email = $_POST['email'];
 
-    $sql = "INSERT INTO Users (firstname,lastname ,hashedpassword, email) VALUES ('$firstname', '$lastname','$password', '$email')";
+    $sql = "INSERT INTO User (firstname,lastname, hashedpassword, email) VALUES ('$firstname', '$lastname','$password', '$email')";
 
     if ($conn->query($sql) === TRUE) {
         echo "User registered successfully";
@@ -18,11 +18,16 @@ if (isset($_POST['register'])) {
 }
 
 // Login user
+session_start(); // Start session if not already started
+
+require_once 'config.php'; // Include the database configuration file
+
+// Login user
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM Users WHERE email='$email'";
+    $sql = "SELECT * FROM User WHERE email='$email'"; // Corrected table name to 'User'
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -63,58 +68,63 @@ if (isset($_POST['login'])) {
     <title>Login</title>
   </head>
   <body>
-  <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Login
-                    </div>
-                    <div class="card-body">
-                        <form action="login_process.php" method="POST">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" id="password" class="form-control" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </form>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <!-- Login Form -->
+        <div class="form-container">
+          <h2>Login</h2>
+          <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <div class="form-group">
+              <label for="loginEmail">Email address</label>
+              <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="">
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Sign Up
-                    </div>
-                    <div class="card-body">
-                        <form action="signup_process.php" method="POST">
-                            <div class="form-group">
-                                <label for="firstname">First Name</label>
-                                <input type="text" name="firstname" id="firstname" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastname">Last Name</label>
-                                <input type="text" name="lastname" id="lastname" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" id="password" class="form-control" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Sign Up</button>
-                        </form>
-                    </div>
-                </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password" value="">
             </div>
+            <button type="submit" class="btn btn-primary" name="login">Login</button>
+          </form>
+          <h1>Not Yet Registered?</h1>
+            <p>
+ 
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Signup
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+            <!-- Signup Form -->
+            <div class="form-container">
+          <h2>Sign Up</h2>
+          <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <div class="form-group">
+              <label for="signupName">FirstName</label>
+              <input type="text" class="form-control" id="signupName" name="firstname" placeholder="Enter First Name" value="">
+            </div>   <div class="form-group">
+              <label for="signupName">LastName</label>
+              <input type="text" class="form-control" id="signupName" name="lastname" placeholder="Enter Last Name" value="">
+            </div>
+            <div class="form-group">
+              <label for="signupEmail">Email address</label>
+              <input type="email" class="form-control" id="signupEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="">
+            </div>
+            <div class="form-group">
+              <label for="signupPassword">Password</label>
+              <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Password" value="">
+            </div>
+            <button type="submit"  class="btn btn-primary" name="register">Sign Up</button>
+          </form>
         </div>
+  </div>
+</div>
+        </div>
+      </div>
+      <div class="col-md-6">
+
+      </div>
     </div>
+  </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>
