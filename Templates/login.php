@@ -1,20 +1,37 @@
 <?php
 require_once 'config.php'; // Include the database configuration file
 
+// Function to generate a random 16-digit number
+function generateAccountNumber() {
+  $randomNumber = '0124';
+  for ($i = 0; $i < 11; $i++) {
+      $randomNumber .= mt_rand(0, 9);
+  }
+  return $randomNumber;
+}
+
 // Register user
 if (isset($_POST['register'])) {
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash password
     $email = $_POST['email'];
+    $account_number = generateAccountNumber();
 
-    $sql = "INSERT INTO User (firstname,lastname, hashedpassword, email) VALUES ('$firstname', '$lastname','$password', '$email')";
+   // Insert user into the User table
+   $sql_user = "INSERT INTO User (firstname, lastname, hashedpassword, email) VALUES ('$firstname', '$lastname', '$password', '$email')";
+   if ($conn->query($sql_user) === TRUE) {
+       // Insert user's account into the accounts table
+       $sql_account = "INSERT INTO accounts (user_id, account_number, balance) VALUES ('$conn->insert_id', '$account_number', 0)";
+       if ($conn->query($sql_account) === TRUE) {
+           echo "User registered successfully";
+       } else {
+           echo "Error inserting account: " . $conn->error;
+       }
+   } else {
+       echo "Error inserting user: " . $conn->error;
+   }
 
-    if ($conn->query($sql) === TRUE) {
-        echo "User registered successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
 }
 
 // Login user

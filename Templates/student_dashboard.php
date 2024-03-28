@@ -9,7 +9,7 @@ include_once "config.php";
 if(isset($_SESSION['user_id'])) {
     // Prepare and execute SQL query to retrieve username
     $user_id = $_SESSION['user_id'];
-    $sql = "SELECT firstname,lastname FROM User WHERE user_id = ?";
+    $sql = "SELECT firstname,lastname, account_number, balance FROM User JOIN accounts ON User.user_id = accounts.user_id WHERE User.user_id = ?";   
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
@@ -21,8 +21,12 @@ if(isset($_SESSION['user_id'])) {
         $row = $result->fetch_assoc();
         $username = $row["firstname"];
         $lastname = $row["lastname"];
+        $account_number = $row["account_number"];
+        $balance = $row["balance"];
     } else {
         $username = "User";
+        $account_number = "N/A";
+        $balance = "N/A";
     }
 
     // Close statement
@@ -30,6 +34,9 @@ if(isset($_SESSION['user_id'])) {
 } else {
     // If user is not logged in, set a default username
     $username = "Guest";
+    $account_number = "N/A";
+    $balance = "N/A";
+    
 }
 ?>
 
@@ -120,15 +127,33 @@ if(isset($_SESSION['user_id'])) {
 </div>
 
 <!-- Page content -->
+<!-- Account details -->
 <div class="content">
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">Account Details </h5>
     <h6 class="card-subtitle mb-2 text-muted">        <span><?php echo $username , $lastname; ?></span><br>
  </h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <p class="card-text">Account Number:<span id="accno"><?php echo $account_number?></span></p>
+    <p class="card-text">Account Balance:<span id="bal"><?php echo $balance?></span></p>
+    <button id="hide">Hide</button>
+    <button id="view">View</button>
+
+  </div>
+</div>
+</div>
+<!-- Deposit -->
+<div class="content">
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+  <form id="depositForm" action="deposit.php" method="POST">
+  <div class="mb-3">
+  <input type="text" class="form-control" id="depositInput" name="amount" aria-describedby="depositHelp" placeholder="Enter amount to deposit">
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
   </div>
 </div>
 </div>
@@ -149,6 +174,19 @@ if(isset($_SESSION['user_id'])) {
         document.getElementById("mySidebar").style.display = "none";
         document.getElementsByClassName("content")[0].style.marginLeft = "0";
     }
+    function hideDetails() {
+        document.getElementById('accno').style.display = 'none';
+        document.getElementById('bal').style.display = 'none';
+
+    }
+    document.getElementById("hide").addEventListener("click", hideDetails);
+
+    function showDetails() {
+        document.getElementById('accno').style.display = 'contents';
+        document.getElementById('bal').style.display = 'contents';
+    }
+    document.getElementById("view").addEventListener("click", showDetails);
+
 </script>
 
 </body>
