@@ -1,3 +1,38 @@
+<?php
+// Start the session
+session_start();
+
+// Include the database configuration file
+include_once "config.php";
+
+// Check if the user is logged in
+if(isset($_SESSION['user_id'])) {
+    // Prepare and execute SQL query to retrieve username
+    $user_id = $_SESSION['user_id'];
+    $sql = "SELECT firstname,lastname FROM User WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if user exists
+    if ($result->num_rows > 0) {
+        // Fetch user's name
+        $row = $result->fetch_assoc();
+        $username = $row["firstname"];
+        $lastname = $row["lastname"];
+    } else {
+        $username = "User";
+    }
+
+    // Close statement
+    $stmt->close();
+} else {
+    // If user is not logged in, set a default username
+    $username = "Guest";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +103,7 @@
 <div id="mySidebar" class="sidebar">
     <!-- Divider with user's name and date -->
     <div class="divider">
-        <span>User's Name</span><br>
+        <span><?php echo $username; ?></span><br>
         <span>Date: <?php echo date("Y-m-d"); ?></span>
     </div>
     <!-- Close button -->
@@ -78,12 +113,24 @@
     <a href="#">Deposit</a>
     <a href="#">Withdraw</a>
     <a href="#">Transact</a>
+    <a href="logout.php">Logout</a>        
+        
+    </a>
+    
 </div>
 
 <!-- Page content -->
 <div class="content">
-    <h2>Main Content</h2>
-    <p>This is the main content area. You can put your page content here.</p>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Account Details </h5>
+    <h6 class="card-subtitle mb-2 text-muted">        <span><?php echo $username , $lastname; ?></span><br>
+ </h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
 </div>
 
 <!-- Bootstrap JS -->
