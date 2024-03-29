@@ -116,11 +116,12 @@ if(isset($_SESSION['user_id'])) {
     <!-- Close button -->
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <!-- Sidebar links -->
-    <a href="#">Home</a>
-    <a href="#">Deposit</a>
-    <a href="#">Withdraw</a>
-    <a href="#">Transact</a>
-    <a href="logout.php">Logout</a>        
+    <a href="#" id="accountdetailsbtn">Home</a>
+    <a href="#" id="depositbtn">Deposit</a>
+    <a href="#" id="withdrawbtn">Withdraw</a>
+    <a href="#" id="transactbtn">Transact</a>
+    <a href="#" id="historybtn">Transact History</a>    
+    <a href="logout.php">Logout</a>    
         
     </a>
     
@@ -128,7 +129,7 @@ if(isset($_SESSION['user_id'])) {
 
 <!-- Page content -->
 <!-- Account details -->
-<div class="content">
+<div class="content" id="accountdetails">
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">Account Details </h5>
@@ -143,19 +144,64 @@ if(isset($_SESSION['user_id'])) {
 </div>
 </div>
 <!-- Deposit -->
-<div class="content">
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-  <form id="depositForm" action="deposit.php" method="POST">
-  <div class="mb-3">
-  <input type="text" class="form-control" id="depositInput" name="amount" aria-describedby="depositHelp" placeholder="Enter amount to deposit">
-  </div>
- 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="content" id="depositcard">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <?php
+            // Start the session
+            session_start();
 
-  </div>
+            // Check if there's a message set in the session
+            if (isset($_SESSION['message'])) {
+                echo '<div class="alert alert-info" role="alert">' . $_SESSION['message'] . '</div>';
+                // Clear the message after displaying it
+                unset($_SESSION['message']);
+            }
+            ?>
+            <form id="depositForm" action="deposit.php" method="POST">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="depositInput" name="amount" aria-describedby="depositHelp" placeholder="Enter amount to deposit">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+<!-- Withdraw -->
+<div class="content" id="withdrawcard">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <?php
+            // Start the session
+            session_start();
+
+            // Check if there's a message set in the session
+            if (isset($_SESSION['message'])) {
+                echo '<div class="alert alert-info" role="alert">' . $_SESSION['message'] . '</div>';
+                // Clear the message after displaying it
+                unset($_SESSION['message']);
+            }
+            ?>
+            <form id="depositForm" action="withdraw.php" method="POST">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="depositInput" name="amount" aria-describedby="depositHelp" placeholder="Enter amount to withdraw">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Transactions -->
+<div class="content" id="transactions" style="margin-top: 0;">
+    <div class="card" style="width: 100%;">
+        <div class="card-body">
+            <?php
+            // Include the transactions table
+            include_once "transactions.php";
+            ?>
+        </div>
+    </div>
 </div>
 
 <!-- Bootstrap JS -->
@@ -190,4 +236,5 @@ if(isset($_SESSION['user_id'])) {
 </script>
 
 </body>
+<script src="../Static/student_dashboard.js"></script>
 </html>

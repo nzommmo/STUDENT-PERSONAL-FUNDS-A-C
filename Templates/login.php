@@ -1,10 +1,10 @@
 <?php
 require_once 'config.php'; // Include the database configuration file
 
-// Function to generate a random 16-digit number
 function generateAccountNumber() {
-  $randomNumber = '0124';
-  for ($i = 0; $i < 11; $i++) {
+  $prefix = '0124';
+  $randomNumber = $prefix;
+  for ($i = strlen($prefix); $i < 16; $i++) {
       $randomNumber .= mt_rand(0, 9);
   }
   return $randomNumber;

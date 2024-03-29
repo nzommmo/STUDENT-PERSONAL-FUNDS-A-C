@@ -33,8 +33,8 @@ if(isset($_SESSION['user_id'])) {
             $stmt->close();
         }
 
-        // Update the database with the deposited amount
-        $sql = "UPDATE accounts SET balance = balance + ? WHERE user_id = ?";
+        // Update the database with the withdrawn amount
+        $sql = "UPDATE accounts SET balance = balance - ? WHERE user_id = ?";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
@@ -42,21 +42,21 @@ if(isset($_SESSION['user_id'])) {
         
             // Execute the prepared statement
             if ($stmt->execute()) {
-                // Check if the deposit was successful
+                // Check if the withdrawal was successful
                 if($stmt->affected_rows > 0) {
                     // Record the transaction in the transactions table
-                    $transaction_type = "deposit";
+                    $transaction_type = "withdrawal";
                     $transaction_sql = "INSERT INTO Transactions (user_id, transaction_type, amount) VALUES (?, ?, ?)";
                     $transaction_stmt = $conn->prepare($transaction_sql);
                     $transaction_stmt->bind_param("iss", $user_id, $transaction_type, $amount);
                     if ($transaction_stmt->execute()) {
-                        $_SESSION['message'] = "Deposit successful!";
+                        $_SESSION['message'] = "Withdraw successful!";
                     } else {
                         $_SESSION['message'] = "Failed to record transaction. Please try again.";
                     }
                     $transaction_stmt->close();
                 } else {
-                    $_SESSION['message'] = "Failed to deposit. Please try again.";
+                    $_SESSION['message'] = "Failed to withdraw. Please try again.";
                 }
             } else {
                 // Handle SQL execution error
@@ -75,7 +75,7 @@ if(isset($_SESSION['user_id'])) {
     $_SESSION['message'] = "User not logged in.";
 }
 
-// Redirect back to the student dashboard page
+// Redirect back to the withdrawal page
 header("Location: student_dashboard.php");
 exit();
 ?>
