@@ -2,12 +2,12 @@
 require_once 'config.php'; // Include the database configuration file
 
 function generateAccountNumber() {
-  $prefix = '0124';
-  $randomNumber = $prefix;
-  for ($i = strlen($prefix); $i < 16; $i++) {
-      $randomNumber .= mt_rand(0, 9);
-  }
-  return $randomNumber;
+    $prefix = '0124';
+    $randomNumber = $prefix;
+    for ($i = strlen($prefix); $i < 16; $i++) {
+        $randomNumber .= mt_rand(0, 9);
+    }
+    return $randomNumber;
 }
 
 // Register user
@@ -18,23 +18,20 @@ if (isset($_POST['register'])) {
     $email = $_POST['email'];
     $account_number = generateAccountNumber();
 
-   // Insert user into the User table
-   $sql_user = "INSERT INTO User (firstname, lastname, hashedpassword, email) VALUES ('$firstname', '$lastname', '$password', '$email')";
-   if ($conn->query($sql_user) === TRUE) {
-       // Insert user's account into the accounts table
-       $sql_account = "INSERT INTO accounts (user_id, account_number, balance) VALUES ('$conn->insert_id', '$account_number', 0)";
-       if ($conn->query($sql_account) === TRUE) {
-           echo "User registered successfully";
-       } else {
-           echo "Error inserting account: " . $conn->error;
-       }
-   } else {
-       echo "Error inserting user: " . $conn->error;
-   }
-
-}
-
-// Login user
+    // Insert user into the User table
+    $sql_user = "INSERT INTO User (firstname, lastname, hashedpassword, email) VALUES ('$firstname', '$lastname', '$password', '$email')";
+    if ($conn->query($sql_user) === TRUE) {
+        // Insert user's account into the accounts table with the generated account number
+        $sql_account = "INSERT INTO accounts (user_id, account_number, balance) VALUES ('$conn->insert_id', '$account_number', 0)";
+        if ($conn->query($sql_account) === TRUE) {
+            echo "User registered successfully";
+        } else {
+            echo "Error inserting account: " . $conn->error;
+        }
+    } else {
+        echo "Error inserting user: " . $conn->error;
+    }
+}// Login user
 session_start(); // Start session if not already started
 
 require_once 'config.php'; // Include the database configuration file

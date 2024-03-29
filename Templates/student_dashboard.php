@@ -192,7 +192,7 @@ if(isset($_SESSION['user_id'])) {
         </div>
     </div>
 </div>
-<!-- Transactions -->
+<!-- transactions history -->
 <div class="content" id="transactions" style="margin-top: 0;">
     <div class="card" style="width: 100%;">
         <div class="card-body">
@@ -204,37 +204,24 @@ if(isset($_SESSION['user_id'])) {
     </div>
 </div>
 
+<!-- transactions history -->
+<div class="content" id="vendors" style="margin-top: 0;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $vendorName; ?></h5>
+                    <p class="card-text"><?php echo $vendorLocation; ?></p>
+                    <a href="#" class="btn btn-primary">View Products</a>
+                </div>
+            </div>
+        </div>
+
+
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- JavaScript to open/close sidebar -->
-<script>
-    function openNav() {
-        document.getElementById("mySidebar").style.width = "250px";
-        document.getElementById("mySidebar").style.display = "block";
-        document.getElementsByClassName("content")[0].style.marginLeft = "250px";
-    }
 
-    function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("mySidebar").style.display = "none";
-        document.getElementsByClassName("content")[0].style.marginLeft = "0";
-    }
-    function hideDetails() {
-        document.getElementById('accno').style.display = 'none';
-        document.getElementById('bal').style.display = 'none';
-
-    }
-    document.getElementById("hide").addEventListener("click", hideDetails);
-
-    function showDetails() {
-        document.getElementById('accno').style.display = 'contents';
-        document.getElementById('bal').style.display = 'contents';
-    }
-    document.getElementById("view").addEventListener("click", showDetails);
-
-</script>
+<script src="../Static/student_dashboard.js"></script>
 
 </body>
-<script src="../Static/student_dashboard.js"></script>
 </html>

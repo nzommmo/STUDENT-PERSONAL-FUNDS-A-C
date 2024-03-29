@@ -32,30 +32,12 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("accountdetails").style.display = "block";
 });
 
-// Deposit link clicked
-document.getElementById("depositbtn").addEventListener("click", function() {
+// Add Student link clicked
+document.getElementById("addstudentbtn").addEventListener("click", function() {
     hideAllContent();
-    document.getElementById("depositcard").style.display = "block";
+    document.getElementById("addstudents").style.display = "block";
 });
 
-// Withdraw link clicked
-document.getElementById("withdrawbtn").addEventListener("click", function() {
-    hideAllContent();
-    document.getElementById("withdrawcard").style.display = "block";
-});
-
-// Transact link clicked
-document.getElementById("transactbtn").addEventListener("click", function() {
-    hideAllContent();
-    document.getElementById("vendors").style.display = "block";
-
-    // Add logic to display transact card if needed
-});
-// Transaction History link clicked
-document.getElementById("historybtn").addEventListener("click", function() {
-    hideAllContent();
-    document.getElementById("transactions").style.display = "block";
-});
 
 // Home link clicked
 document.getElementById("accountdetailsbtn").addEventListener("click", function() {
