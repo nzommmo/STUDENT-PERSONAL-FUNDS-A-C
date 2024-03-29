@@ -52,6 +52,16 @@ document.getElementById("addvendorsbtn").addEventListener("click", function() {
     hideAllContent();
     document.getElementById("addvendors").style.display = "block";
 });
+// Update Vendors link clicked
+document.getElementById("updatevendorsbtn").addEventListener("click", function() {
+    hideAllContent();
+    document.getElementById("updatevendors").style.display = "block";
+});
+// Delete Vendors link clicked
+document.getElementById("deletevendorsbtn").addEventListener("click", function() {
+    hideAllContent();
+    document.getElementById("deletevendors").style.display = "block";
+});
 
 // Home link clicked
 document.getElementById("accountdetailsbtn").addEventListener("click", function() {

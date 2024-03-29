@@ -126,8 +126,8 @@ if(isset($_SESSION['user_id'])) {
     <!-- Divider -->
     <div class="divider">Vendors</div>
     <a href="#" id="addvendorsbtn">Add Vendor</a>
-    <a href="#">Delete Vendor</a>
-    <a href="#">Update Vendor</a>
+    <a href="#" id="updatevendorsbtn">Update Vendor</a>
+    <a href="#" id="deletevendorsbtn" >Delete Vendor</a>
     <!-- Logout -->
     <a href="logout.php">Logout</a>
 </div>
@@ -191,9 +191,66 @@ if(isset($_SESSION['user_id'])) {
         </div>
     </div>
 </div>
+<!-- Update Vendors  -->
+<div class="content" id="updatevendors" style="margin-top: 20px;">
+    <div class="card" style="width: 100%;">
+        <div class="card-body">
+        <div class="container mt-5">
+    <div class="row">
+        <?php
+        // Include database connection
+        include_once "config.php";
 
+        // Fetch vendors from database
+        $sql = "SELECT * FROM Vendors";
+        $result = $conn->query($sql);
 
+        // Check if there are vendors
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                // Vendor data
+                $vendorId = $row['VendorID'];
+                $vendorName = $row['VendorName'];
+                $vendorLocation = $row['VendorLocation'];
+        ?>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $vendorName; ?></h5>
+                    <p class="card-text"><?php echo $vendorLocation; ?></p>
+                    <!-- Update Button -->
+                    <a href="update_vendor.php?id=<?php echo $vendorId; ?>" class="btn btn-primary">Update</a>
+                    <!-- View Products Button (Optional) -->
+                    <a href="#" class="btn btn-secondary">View Products</a>
+                </div>
+            </div>
+        </div>
+        <?php
+            }
+        } else {
+            echo "<div class='col'>No vendors found.</div>";
+        }
 
+        // Close database connection
+        $conn->close();
+        ?>
+    </div>
+</div>
+
+        </div>
+    </div>
+</div>
+<!-- Delete Vendors  -->
+<div class="content" id="deletevendors" style="margin-top: 20px;">
+    <div class="card" style="width: 100%;">
+        <div class="card-body">
+            <?php
+            // Include the php file with the add student form
+            include_once "delete_vendor.php";
+            ?>
+        </div>
+    </div>
+</div>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
