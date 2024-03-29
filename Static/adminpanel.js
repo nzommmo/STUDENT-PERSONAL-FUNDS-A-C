@@ -37,7 +37,21 @@ document.getElementById("addstudentbtn").addEventListener("click", function() {
     hideAllContent();
     document.getElementById("addstudents").style.display = "block";
 });
-
+// Update Student link clicked
+document.getElementById("updatestudentbtn").addEventListener("click", function() {
+    hideAllContent();
+    document.getElementById("updatestudents").style.display = "block";
+});
+// Delete Student link clicked
+document.getElementById("deletestudentbutton").addEventListener("click", function() {
+    hideAllContent();
+    document.getElementById("deletestudents").style.display = "block";
+});
+// Add Vendors link clicked
+document.getElementById("addvendorsbtn").addEventListener("click", function() {
+    hideAllContent();
+    document.getElementById("addvendors").style.display = "block";
+});
 
 // Home link clicked
 document.getElementById("accountdetailsbtn").addEventListener("click", function() {

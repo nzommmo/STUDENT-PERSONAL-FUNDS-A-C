@@ -121,11 +121,11 @@ if(isset($_SESSION['user_id'])) {
     <!-- Divider -->
     <div class="divider">Students</div>
     <a href="#" id="addstudentbtn">Add Student</a>
-    <a href="#">Delete Student</a>
-    <a href="#">Update Student</a>
+    <a href="#" id="deletestudentbutton">Delete Student</a>
+    <a href="#" id="updatestudentbtn">Update Student</a>
     <!-- Divider -->
     <div class="divider">Vendors</div>
-    <a href="#">Add Vendor</a>
+    <a href="#" id="addvendorsbtn">Add Vendor</a>
     <a href="#">Delete Vendor</a>
     <a href="#">Update Vendor</a>
     <!-- Logout -->
@@ -147,17 +147,51 @@ if(isset($_SESSION['user_id'])) {
     </div>
 </div>
 
-<!-- transactions history -->
+<!-- add students  -->
 <div class="content" id="addstudents" style="margin-top: 20px;">
     <div class="card" style="width: 100%;">
         <div class="card-body">
             <?php
-            // Include the transactions table
+            // Include the php file with the add student form
             include_once "add_student.php";
             ?>
         </div>
     </div>
 </div>
+<!-- update students  -->
+<div class="content" id="updatestudents" style="margin-top: 20px;">
+    <div class="card" style="width: 100%;">
+        <div class="card-body">
+            <?php
+            // Include the php file with the add student form
+            include_once "update_student.php";
+            ?>
+        </div>
+    </div>
+</div>
+<!-- Delete students  -->
+<div class="content" id="deletestudents" style="margin-top: 20px;">
+    <div class="card" style="width: 100%;">
+        <div class="card-body">
+            <?php
+            // Include the php file with the add student form
+            include_once "delete_student.php";
+            ?>
+        </div>
+    </div>
+</div>
+<!-- Add Vendors  -->
+<div class="content" id="addvendors" style="margin-top: 20px;">
+    <div class="card" style="width: 100%;">
+        <div class="card-body">
+            <?php
+            // Include the php file with the add student form
+            include_once "add_vendors.php";
+            ?>
+        </div>
+    </div>
+</div>
+
 
 
 <!-- Bootstrap JS -->
