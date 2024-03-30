@@ -25,9 +25,9 @@ https://github.com/nzommmo/STUDENT-PERSONAL-FUNDS-A-C<br>
 4.The Loading page pops up and loads for a maximum of 5 seconds after which the main page is display.<br>
 
 ## Features
-It offers realtime depositing and withdraw of money into and out of the system.<br>
-Through Mapesa School System it solves the problem of mismanagement of student funds by the bursar.It provides easy record keeping as everything is automated minimising or having no manual entry errors.
-
+1.Real time depositing  and withdrawal of funds to student personal accounts.
+2.Access to vendors within the school for easy and direct payment.
+3.
 
 Supporting Stack:<br>
 1.HTML, CSS, JAVASCRIPT for Frontend Development.<br>
