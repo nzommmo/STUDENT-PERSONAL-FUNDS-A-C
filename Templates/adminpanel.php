@@ -121,13 +121,13 @@ if(isset($_SESSION['user_id'])) {
     <!-- Divider -->
     <div class="divider">Students</div>
     <a href="#" id="addstudentbtn">Add Student</a>
-    <a href="#" id="deletestudentbutton">Delete Student</a>
-    <a href="#" id="updatestudentbtn">Update Student</a>
+    <a href="delete_studentsform.php" id="deletestudentbutton">Delete Student</a>
+    <a href="update_student.php" id="updatestudentbtn">Update Student</a>
     <!-- Divider -->
     <div class="divider">Vendors</div>
     <a href="#" id="addvendorsbtn">Add Vendor</a>
     <a href="#" id="updatevendorsbtn">Update Vendor</a>
-    <a href="#" id="deletevendorsbtn" >Delete Vendor</a>
+    <a href="delete_vendorsform.php" id="deletevendorsbtn" target="_blank" >Delete Vendor</a>
     <!-- Logout -->
     <a href="logout.php">Logout</a>
 </div>
@@ -158,17 +158,7 @@ if(isset($_SESSION['user_id'])) {
         </div>
     </div>
 </div>
-<!-- update students  -->
-<div class="content" id="updatestudents" style="margin-top: 20px;">
-    <div class="card" style="width: 100%;">
-        <div class="card-body">
-            <?php
-            // Include the php file with the add student form
-            include_once "update_student.php";
-            ?>
-        </div>
-    </div>
-</div>
+
 <!-- Delete students  -->
 <div class="content" id="deletestudents" style="margin-top: 20px;">
     <div class="card" style="width: 100%;">
@@ -237,17 +227,6 @@ if(isset($_SESSION['user_id'])) {
     </div>
 </div>
 
-        </div>
-    </div>
-</div>
-<!-- Delete Vendors  -->
-<div class="content" id="deletevendors" style="margin-top: 20px;">
-    <div class="card" style="width: 100%;">
-        <div class="card-body">
-            <?php
-            // Include the php file with the add student form
-            include_once "delete_vendor.php";
-            ?>
         </div>
     </div>
 </div>
