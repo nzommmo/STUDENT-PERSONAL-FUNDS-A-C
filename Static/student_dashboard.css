@@ -1,0 +1,39 @@
+.card-body{
+    background-image: linear-gradient(to right,#F9B872,#B6E1E7);
+    border-radius: 5px;
+ 
+}
+body{
+    background-image: linear-gradient(to right,#FAE7A5,#B6E1E7);
+}
+
+#mySidebar a{
+    color: black;
+}
+#mySidebar a:hover{
+    background-color:#DDD0C8;
+}
+
+.accbtn{
+    border-radius: 4px;
+    border: none;
+    margin-left: 30px;
+    background-color: black;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+#depositInput{
+    background-color: transparent;
+    outline: 1px solid black;
+}
+#depositInput:hover{
+    outline: 2px solid black;
+}
+#depositbutton{
+    background-color: #DDD0C8;
+    color: black;
+}
+#depositbutton:hover{
+    background-color:#B6E1E7 ;
+  
+}

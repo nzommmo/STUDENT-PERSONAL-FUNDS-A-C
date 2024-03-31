@@ -58,10 +58,10 @@ if(isset($_SESSION['user_id'])) {
             position: fixed;
             top: 0;
             left: 0;
-            background-color: #f8f9fa;
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
+            background-color: #F9B872;
         }
         /* Sidebar links */
         .sidebar a {
@@ -89,7 +89,7 @@ if(isset($_SESSION['user_id'])) {
         .divider {
             margin-top: -60px;
             padding: 15px 15px 10px; /* Adjusted padding */
-            background-color: #e9ecef;
+            background-color: #FAE7A5;
             font-weight: bold;
             color: #212529;
             margin-bottom:20px ;
@@ -136,10 +136,10 @@ if(isset($_SESSION['user_id'])) {
     <h5 class="card-title">Account Details </h5>
     <h6 class="card-subtitle mb-2 text-muted">        <span><?php echo $username , $lastname; ?></span><br>
  </h6>
-    <p class="card-text">Account Number:<span id="accno"><?php echo $account_number?></span></p>
+    <p class="card-text" id="account">Account Number:<span id="accno"><?php echo $account_number?></span></p>
     <p class="card-text">Account Balance:<span id="bal"><?php echo $balance?></span></p>
-    <button id="hide">Hide</button>
-    <button id="view">View</button>
+    <button id="hide" class="accbtn">Hide</button>
+    <button id="view" class="accbtn">View</button>
 
   </div>
 </div>
@@ -168,7 +168,7 @@ if(isset($_SESSION['user_id'])) {
                 <div class="mb-3">
                     <input type="text" class="form-control" id="depositInput" name="amount" aria-describedby="depositHelp" placeholder="Enter amount to deposit">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="depositbutton">Deposit</button>
             </form>
         </div>
     </div>
