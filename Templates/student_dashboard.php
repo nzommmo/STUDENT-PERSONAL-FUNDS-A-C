@@ -46,6 +46,7 @@ if(isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toggleable Sidebar</title>
+    <link rel="stylesheet" href="../Static/student_dashboard.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -104,7 +105,7 @@ if(isset($_SESSION['user_id'])) {
 <body>
 
 <!-- Menu icon -->
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()" >&#9776;</span>
 
 <!-- Sidebar -->
 <div id="mySidebar" class="sidebar">

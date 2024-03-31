@@ -1,0 +1,275 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Mar 31, 2024 at 06:58 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `Mapesa`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts`
+--
+
+CREATE TABLE `accounts` (
+  `account_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `account_number` text DEFAULT '0',
+  `balance` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`account_id`, `user_id`, `account_number`, `balance`) VALUES
+(71, 69, '0124864655541187', 3702),
+(72, 70, '0124393911629588', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Transactions`
+--
+
+CREATE TABLE `Transactions` (
+  `transaction_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `transaction_type` enum('deposit','withdrawal') NOT NULL,
+  `amount` int(11) NOT NULL,
+  `transaction_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Transactions`
+--
+
+INSERT INTO `Transactions` (`transaction_id`, `user_id`, `transaction_type`, `amount`, `transaction_date`) VALUES
+(23, 69, 'deposit', 1000, '2024-03-31 13:04:48'),
+(24, 69, 'deposit', -100, '2024-03-31 13:05:59'),
+(25, 69, 'withdrawal', 1000, '2024-03-31 13:06:15'),
+(26, 69, 'deposit', 100, '2024-03-31 13:10:22'),
+(27, 69, 'deposit', 100, '2024-03-31 13:12:40'),
+(28, 69, 'deposit', 1000, '2024-03-31 13:13:50'),
+(29, 69, 'deposit', 1000, '2024-03-31 13:16:00'),
+(30, 69, 'deposit', 1000, '2024-03-31 13:19:15'),
+(31, 69, 'withdrawal', 1000, '2024-03-31 13:22:40'),
+(32, 69, 'deposit', 100, '2024-03-31 13:31:55'),
+(33, 69, 'deposit', 1000, '2024-03-31 13:33:36'),
+(34, 69, 'deposit', 100, '2024-03-31 13:36:50'),
+(35, 69, 'deposit', 200, '2024-03-31 13:37:39'),
+(36, 69, 'deposit', 100, '2024-03-31 13:38:49'),
+(37, 69, 'deposit', 100, '2024-03-31 13:39:26'),
+(38, 69, 'deposit', 1000, '2024-03-31 13:39:41'),
+(39, 69, 'deposit', 2, '2024-03-31 13:40:05'),
+(40, 69, 'withdrawal', 1000, '2024-03-31 13:41:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `User`
+--
+
+CREATE TABLE `User` (
+  `user_id` int(11) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `hashedpassword` varchar(255) NOT NULL,
+  `role` enum('admin','student') DEFAULT 'student',
+  `createdon` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `User`
+--
+
+INSERT INTO `User` (`user_id`, `firstname`, `lastname`, `email`, `hashedpassword`, `role`, `createdon`) VALUES
+(69, 'ERIC', 'NZOMO', 'ericnzomo17@gmail.com', '$2y$10$Ei3WglgBmGajmyBlQNLGYeILGLY7WmzRoIWIM6E2YK3DyL2QQ4rLq', 'student', '2024-03-31 13:04:33'),
+(70, '', '', '', '$2y$10$Vpi7rECRXcVPZXquT1a64um0VZSCAu1nNuh0xNR4PnlBjBIyxqO1e', 'student', '2024-03-31 13:46:23');
+
+--
+-- Triggers `User`
+--
+DELIMITER $$
+CREATE TRIGGER `after_user_insert_v2` AFTER UPDATE ON `User` FOR EACH ROW BEGIN
+    IF NOT EXISTS (SELECT * FROM accounts WHERE user_id = NEW.user_id) THEN
+        INSERT INTO accounts (user_id, balance) VALUES (NEW.user_id, 0);
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `delete_user_records_trigger` AFTER DELETE ON `User` FOR EACH ROW BEGIN
+    -- Delete associated records from the Transactions table
+    DELETE FROM Transactions WHERE user_id = OLD.user_id;
+
+    -- Delete associated records from the accounts table
+    DELETE FROM accounts WHERE user_id = OLD.user_id;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `VendorItems`
+--
+
+CREATE TABLE `VendorItems` (
+  `item_id` int(11) NOT NULL,
+  `vendor_id` int(11) DEFAULT NULL,
+  `item_name` text DEFAULT NULL,
+  `item_description` text DEFAULT NULL,
+  `item_price` int(11) DEFAULT NULL,
+  `item_quantity` int(11) DEFAULT NULL,
+  `item_image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `VendorItems`
+--
+
+INSERT INTO `VendorItems` (`item_id`, `vendor_id`, `item_name`, `item_description`, `item_price`, `item_quantity`, `item_image`, `created_at`, `updated_at`) VALUES
+(1, 14, 'Fanta Passion', 'Drink', 50, 5, NULL, '2024-03-31 14:02:10', '2024-03-31 14:08:35'),
+(2, 14, 'Queen Cake', 'Soft Foods', 20, 10, NULL, '2024-03-31 14:10:39', '2024-03-31 14:10:39'),
+(3, 14, 'Krackles - Tangy Tomato', 'Potato Crisps', 60, 14, NULL, '2024-03-31 14:10:39', '2024-03-31 14:10:39'),
+(4, 15, 'Exercise Book', 'A4 - Square Ruled', 40, 10, NULL, '2024-03-31 14:21:30', '2024-03-31 14:21:30'),
+(5, 15, 'Ruler', 'Plastic - 30CMs', 20, 5, NULL, '2024-03-31 14:21:30', '2024-03-31 14:21:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Vendors`
+--
+
+CREATE TABLE `Vendors` (
+  `VendorID` int(11) NOT NULL,
+  `VendorName` varchar(255) NOT NULL,
+  `VendorLocation` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Vendors`
+--
+
+INSERT INTO `Vendors` (`VendorID`, `VendorName`, `VendorLocation`) VALUES
+(14, 'School Canteen', 'LIBRARY BASEMENT'),
+(15, 'BOOKSHOP', 'MISSIO HALL');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`account_id`);
+
+--
+-- Indexes for table `Transactions`
+--
+ALTER TABLE `Transactions`
+  ADD PRIMARY KEY (`transaction_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `User`
+--
+ALTER TABLE `User`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `VendorItems`
+--
+ALTER TABLE `VendorItems`
+  ADD PRIMARY KEY (`item_id`),
+  ADD KEY `vendor_id` (`vendor_id`);
+
+--
+-- Indexes for table `Vendors`
+--
+ALTER TABLE `Vendors`
+  ADD PRIMARY KEY (`VendorID`),
+  ADD UNIQUE KEY `VendorName` (`VendorName`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT for table `Transactions`
+--
+ALTER TABLE `Transactions`
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `User`
+--
+ALTER TABLE `User`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `VendorItems`
+--
+ALTER TABLE `VendorItems`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `Vendors`
+--
+ALTER TABLE `Vendors`
+  MODIFY `VendorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`);
+
+--
+-- Constraints for table `Transactions`
+--
+ALTER TABLE `Transactions`
+  ADD CONSTRAINT `Transactions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`);
+
+--
+-- Constraints for table `VendorItems`
+--
+ALTER TABLE `VendorItems`
+  ADD CONSTRAINT `VendorItems_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `Vendors` (`VendorID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
