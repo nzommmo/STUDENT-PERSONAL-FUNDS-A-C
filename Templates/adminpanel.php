@@ -23,20 +23,14 @@ if(isset($_SESSION['user_id'])) {
         $lastname = $row["lastname"];
         $account_number = $row["account_number"];
         $balance = $row["balance"];
-    } else {
-        $username = "User";
-        $account_number = "N/A";
-        $balance = "N/A";
-    }
+    } 
 
     // Close statement
     $stmt->close();
 } else {
-    // If user is not logged in, set a default username
-    $username = "Guest";
-    $account_number = "N/A";
-    $balance = "N/A";
-    
+    // If user is not logged in, redirect to login page
+    header("Location: login.php");
+    exit(); // Stop further execution
 }
 ?>
 
@@ -47,6 +41,7 @@ if(isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toggleable Sidebar</title>
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../Static/admin_dashboard.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
@@ -57,7 +52,7 @@ if(isset($_SESSION['user_id'])) {
             position: fixed;
             top: 0;
             left: 0;
-            background-color: #f8f9fa;
+            background-color: #FF595A;
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
@@ -88,8 +83,8 @@ if(isset($_SESSION['user_id'])) {
         .divider {
             padding: 10px 15px;
             font-weight: bold;
-            color: #212529;
-            background-color: #e9ecef;
+            color: black;
+            background-color: #FF595A;
         }
         /* Page content */
         .content {
@@ -102,7 +97,7 @@ if(isset($_SESSION['user_id'])) {
         }
     </style>
 </head>
-<body>
+<body id="adminbody">
 
 <!-- Menu icon -->
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
@@ -136,7 +131,7 @@ if(isset($_SESSION['user_id'])) {
 <!-- Account details -->
 <div class="content" id="accountdetails">
     <div class="card" style="width: 18rem;">
-        <div class="card-body">
+        <div class="card-body" id="acc">
             <h5 class="card-title">Account Details</h5>
             <h6 class="card-subtitle mb-2 text-muted"><?php echo $username , $lastname; ?></h6>
             <p class="card-text">Account Number:<span id="accno"><?php echo $account_number?></span></p>
@@ -149,8 +144,8 @@ if(isset($_SESSION['user_id'])) {
 
 <!-- add students  -->
 <div class="content" id="addstudents" style="margin-top: 20px;">
-    <div class="card" style="width: 100%;">
-        <div class="card-body">
+    <div class="card" id="addstudentcont">
+        <div class="card-body" >
             <?php
             // Include the php file with the add student form
             include_once "add_student.php";

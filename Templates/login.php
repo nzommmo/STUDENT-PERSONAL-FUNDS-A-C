@@ -71,74 +71,85 @@ if (isset($_POST['login'])) {
 }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Static/student_dashboard.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Login</title>
-  </head>
-  <body>
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col-md-6">
-        <!-- Login Form -->
-        <div class="form-container">
-          <h2>Login</h2>
-          <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <div class="form-group">
-              <label for="loginEmail">Email address</label>
-              <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="">
+    <style>
+        .form-container {
+            margin-right: 30px; /* Adjust as needed */
+        }
+        #signupform {
+            display: none; /* Hide the signup form initially */
+        }
+    </style>
+</head>
+<body id="loginpage">
+    <div class="container" id="formcontent">
+        <div class="row mt-5" id="formholder">
+            <div class="col-md-6 d-flex justify-content-center align-items-center" id="log">
+                <!-- Login Form -->
+                <div class="form-container" id="loginform">
+                    <h2>Login</h2>
+                    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <div class="form-group">
+                            <label for="loginEmail">Email address</label>
+                            <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password" value="">
+                        </div> <br>
+                        <h4 id="not">Not Yet Registered? </h4>
+                        <button type="button" class="btn btn-primary" id="showSignup">Sign Up</button>
+                        <button type="submit" class="btn btn-primary" name="login" id="loginbtnm">Login</button>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="loginPassword">Password</label>
-              <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password" value="">
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <!-- Signup Form -->
+                <div class="form-container" id="signupform">
+                    <h2>Sign Up</h2>
+                    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <div class="form-group">
+                            <label for="signupName">First Name</label>
+                            <input type="text" class="form-control" id="signupName" name="firstname" placeholder="Enter First Name" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="signupName">Last Name</label>
+                            <input type="text" class="form-control" id="signupName" name="lastname" placeholder="Enter Last Name" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email address</label>
+                            <input type="email" class="form-control" id="signupEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Password" value="">
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="register" id="signupbtn">Sign Up</button><br>
+                        <P>or</P>
+                        <button type="submit" class="btn btn-primary" name="register" id="showLogin">Login</button>
+                    </form>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary" name="login">Login</button>
-          </form>
-          <h1>Not Yet Registered?</h1>
-            <p>
- 
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Signup
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-            <!-- Signup Form -->
-            <div class="form-container">
-          <h2>Sign Up</h2>
-          <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <div class="form-group">
-              <label for="signupName">FirstName</label>
-              <input type="text" class="form-control" id="signupName" name="firstname" placeholder="Enter First Name" value="">
-            </div>   <div class="form-group">
-              <label for="signupName">LastName</label>
-              <input type="text" class="form-control" id="signupName" name="lastname" placeholder="Enter Last Name" value="">
-            </div>
-            <div class="form-group">
-              <label for="signupEmail">Email address</label>
-              <input type="email" class="form-control" id="signupEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="">
-            </div>
-            <div class="form-group">
-              <label for="signupPassword">Password</label>
-              <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Password" value="">
-            </div>
-            <button type="submit"  class="btn btn-primary" name="register">Sign Up</button>
-          </form>
         </div>
-  </div>
-</div>
-        </div>
-      </div>
-      <div class="col-md-6">
-
-      </div>
     </div>
-  </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  </body>
+    <script>
+        document.getElementById('showSignup').addEventListener('click', function() {
+            document.getElementById('signupform').style.display = 'block'; // Display the signup form
+            document.getElementById('loginform').style.display = 'none'; // Hide the login form
+        });
+        document.getElementById('showLogin').addEventListener('click', function() {
+            document.getElementById('signupform').style.display = 'none'; // Display the signup form
+            document.getElementById('loginform').style.display = 'block'; // Hide the login form
+        });
+        
+    </script>
+</body>
 </html>

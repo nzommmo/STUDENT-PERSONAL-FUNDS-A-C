@@ -7,9 +7,9 @@ include_once "config.php";
 
 // Check if the user is logged in
 if(isset($_SESSION['user_id'])) {
-    // Prepare and execute SQL query to retrieve username
+    // Prepare and execute SQL query to retrieve user details
     $user_id = $_SESSION['user_id'];
-    $sql = "SELECT firstname,lastname, account_number, balance FROM User JOIN accounts ON User.user_id = accounts.user_id WHERE User.user_id = ?";   
+    $sql = "SELECT firstname, lastname, account_number, balance FROM User JOIN accounts ON User.user_id = accounts.user_id WHERE User.user_id = ?";   
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
@@ -17,28 +17,23 @@ if(isset($_SESSION['user_id'])) {
 
     // Check if user exists
     if ($result->num_rows > 0) {
-        // Fetch user's name
+        // Fetch user's details
         $row = $result->fetch_assoc();
         $username = $row["firstname"];
         $lastname = $row["lastname"];
         $account_number = $row["account_number"];
         $balance = $row["balance"];
-    } else {
-        $username = "User";
-        $account_number = "N/A";
-        $balance = "N/A";
-    }
+    } 
 
     // Close statement
     $stmt->close();
 } else {
-    // If user is not logged in, set a default username
-    $username = "Guest";
-    $account_number = "N/A";
-    $balance = "N/A";
-    
+    // Redirect to login page if user is not logged in
+    header("Location: login.php");
+    exit(); // Stop further execution
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -102,7 +97,7 @@ if(isset($_SESSION['user_id'])) {
         }
     </style>
 </head>
-<body>
+<body id="studentdashboard">
 
 <!-- Menu icon -->
 <span style="font-size:30px;cursor:pointer" onclick="openNav()" >&#9776;</span>
@@ -199,7 +194,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
                 <div class="mb-3">
                     <input type="text" class="form-control" id="depositInput" name="amount" aria-describedby="depositHelp" placeholder="Enter amount to withdraw">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="withdrawbutton">Withdraw</button>
             </form>
         </div>
     </div>

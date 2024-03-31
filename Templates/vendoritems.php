@@ -68,10 +68,12 @@ if(isset($_POST['add_to_cart'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $vendorName; ?> Items</title>
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../Static/student_dashboard.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<a href="cart.php">view items in cart</a>
+<body id="vendoritems">
+<a href="cart.php" id="cartitems">view items in cart</a>
 <div class="container mt-5">
     <h1><?php echo $vendorName; ?> Items</h1>
     <h3>Location: <?php echo $vendorLocation; ?></h3>
@@ -82,10 +84,10 @@ if(isset($_POST['add_to_cart'])) {
                 ?>
                 <div class="col-md-4 mb-3">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" id="vendorlist">
                             <h5 class="card-title"><?php echo $row_item['item_name']; ?></h5>
                             <p class="card-text">Description: <?php echo $row_item['item_description']; ?></p>
-                            <p class="card-text">Price: Ksh <?php echo $row_item['item_price']; ?></p>
+                            <p class="card-text" id="itemprice">Price: Ksh <?php echo $row_item['item_price']; ?></p>
                             <!-- Add to Cart form -->
                             <form action="" method="post">
                                 <input type="hidden" name="item_id" value="<?php echo $row_item['item_id']; ?>">

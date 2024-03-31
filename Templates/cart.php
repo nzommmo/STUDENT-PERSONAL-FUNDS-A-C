@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Cart</title>
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../Static/student_dashboard.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body id="cartpage">
 
 <div class="container mt-5">
     <h1>Items in Cart</h1>
@@ -54,7 +56,7 @@
                 </tbody>
             </table>
             <!-- Checkout button -->
-            <a href="checkout.php" class="btn btn-primary">Checkout</a>
+            <a href="checkout.php" class="btn btn-primary" id="checkoutbtn">Checkout</a>
         </div>
     </div>
 </div>
