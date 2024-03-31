@@ -39,7 +39,7 @@
                     <h5 class="card-title"><?php echo $vendorName; ?></h5>
                     <p class="card-text"><?php echo $vendorLocation; ?></p>
                     <!-- Update Button -->
-                    <a href="vendoritems.php?id=1<?php echo $vendorId; ?>" class="btn btn-primary">View Products</a>
+                    <a href="vendoritems.php?id=<?php echo $vendorId; ?>" class="btn btn-primary">View Products</a>
                     <!-- View Products Button (Optional) -->
                 </div>
             </div>

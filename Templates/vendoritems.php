@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Include database connection
 include_once "config.php";
 
@@ -36,15 +38,27 @@ if(isset($_GET['id'])) {
     echo "Vendor ID not provided";
     exit(); // Stop further execution
 }
-session_start();
 
-// Initialize cart items variable
-$cartItems = array();
+// Add to Cart Logic
+if(isset($_POST['add_to_cart'])) {
+    $itemId = $_POST['item_id'];
+    $itemName = $_POST['item_name'];
+    $itemPrice = $_POST['item_price'];
+    $vendorId = $_POST['vendor_id'];
 
-// Check if cart session variable is set
-if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    $cartItems = $_SESSION['cart'];
+    // Add item to cart session variable
+    $_SESSION['cart'][] = [
+        'item_id' => $itemId,
+        'item_name' => $itemName,
+        'item_price' => $itemPrice,
+        'vendor_id' => $vendorId
+    ];
+
+    echo "<script>alert('Item added to cart successfully.');</script>";
+    // Redirect to the same page to prevent form resubmission
+    echo "<script>window.location.href='vendoritems.php?id=$vendorId';</script>";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -57,58 +71,43 @@ if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+<a href="cart.php">view items in cart</a>
 <div class="container mt-5">
-        <!-- Cart items section -->
-        <div class="row mb-4">
-            <div class="col">
-                <h3>Items in Cart</h3>
-                <ul>
-                    <?php
-                    // Display items in cart
-                    foreach ($cartItems as $cartItem) {
-                        echo "<li>{$cartItem['item_name']} - Ksh {$cartItem['item_price']}</li>";
-                    }
-                    ?>
-                </ul>
-            </div>
-        </div>
-    <div class="container mt-5">
-        <h1><?php echo $vendorName; ?> Items</h1>
-        <h3>Location: <?php echo $vendorLocation; ?></h3>
-        <div class="row">
-            <?php
-            if ($result_items->num_rows > 0) {
-                while ($row_item = $result_items->fetch_assoc()) {
-                    ?>
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $row_item['item_name']; ?></h5>
-                                <p class="card-text">Description: <?php echo $row_item['item_description']; ?></p>
-                                <p class="card-text">Price: Ksh <?php echo $row_item['item_price']; ?></p>
-                                <!-- Add to Cart form -->
-                                <form action="cart.php" method="post">
-                                    <input type="hidden" name="item_id" value="<?php echo $row_item['item_id']; ?>">
-                                    <input type="hidden" name="item_name" value="<?php echo $row_item['item_name']; ?>">
-                                    <input type="hidden" name="item_price" value="<?php echo $row_item['item_price']; ?>">
-                                    <input type="hidden" name="vendor_id" value="<?php echo $vendorId; ?>"> <!-- Add vendor_id -->
-                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                </form>
+    <h1><?php echo $vendorName; ?> Items</h1>
+    <h3>Location: <?php echo $vendorLocation; ?></h3>
+    <div class="row">
+        <?php
+        if ($result_items->num_rows > 0) {
+            while ($row_item = $result_items->fetch_assoc()) {
+                ?>
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $row_item['item_name']; ?></h5>
+                            <p class="card-text">Description: <?php echo $row_item['item_description']; ?></p>
+                            <p class="card-text">Price: Ksh <?php echo $row_item['item_price']; ?></p>
+                            <!-- Add to Cart form -->
+                            <form action="" method="post">
+                                <input type="hidden" name="item_id" value="<?php echo $row_item['item_id']; ?>">
+                                <input type="hidden" name="item_name" value="<?php echo $row_item['item_name']; ?>">
+                                <input type="hidden" name="item_price" value="<?php echo $row_item['item_price']; ?>">
+                                <input type="hidden" name="vendor_id" value="<?php echo $vendorId; ?>"> <!-- Add vendor_id -->
+                                <button type="submit" name="add_to_cart" class="btn btn-primary">Add to Cart</button>
+                            </form>
 
-                            </div>
                         </div>
                     </div>
-                    <?php
-                }
-            } else {
-                echo "No items found for this vendor.";
+                </div>
+                <?php
             }
-            ?>
-        </div>
+        } else {
+            echo "No items found for this vendor.";
+        }
+        ?>
     </div>
+</div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
