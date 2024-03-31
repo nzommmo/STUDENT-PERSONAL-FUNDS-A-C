@@ -178,7 +178,9 @@ if(isset($_SESSION['user_id'])) {
 <div id="withdrawalert" style="width: 200px">
 <?php
             // Start the session
-            session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
             // Check if there's a message set in the session
             if (isset($_SESSION['message'])) {
