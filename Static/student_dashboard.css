@@ -3,7 +3,7 @@
     border-radius: 5px;
  
 }
-body{
+#studentdashboard{
     background-image: linear-gradient(to right,#FAE7A5,#B6E1E7);
 }
 
@@ -29,11 +29,125 @@ body{
 #depositInput:hover{
     outline: 2px solid black;
 }
-#depositbutton{
+#depositbutton , #withdrawbutton{
     background-color: #DDD0C8;
     color: black;
 }
 #depositbutton:hover{
     background-color:#B6E1E7 ;
-  
+}
+#withdrawbutton:hover{
+    background-color:#B6E1E7 ;
+
+}
+#vendorinfo,#loginpage{
+    background-image: linear-gradient(to right,#F9B872,#B6E1E7);
+    border-radius: 5px;
+ 
+}
+
+#Vendorspage{
+    background-image: linear-gradient(to right,#FAE7A5,#FAE7A5);
+}
+
+#mySidebar a{
+    color: black;
+}
+#mySidebar a:hover{
+    background-color:#DDD0C8;
+}
+
+.accbtn{
+    border-radius: 4px;
+    border: none;
+    margin-left: 30px;
+    background-color: black;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+#depositInput{
+    background-color: transparent;
+    outline: 1px solid black;
+}
+#depositInput:hover{
+    outline: 2px solid black;
+}
+#depositbutton , #withdrawbutton{
+    background-color: #DDD0C8;
+    color: black;
+}
+#depositbutton:hover{
+    background-color:#B6E1E7 ;
+}
+#withdrawbutton:hover{
+    background-color:#B6E1E7 ;
+
+}
+#viewproducts{
+    background-color:black ;
+
+}
+#vendorscontent{
+    background: #FAE7A5;
+}
+#vendorsdesc{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#vendoritems,#cartpage{
+    background-color: #FAE7A5;
+}
+#cartitems{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right: 15px;
+}
+#checkoutbtn{
+    background-color:#B6E1E7;
+}
+#checkoutbtn:hover{
+    background-color:rgba(0, 0, 255, 0.651);
+}
+
+#loginform{
+    border-radius: 5px;
+    outline: 2px solid rgba(0, 0, 0, 0.13);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#loginformcontent,#loginformholder,#loginformdiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+#log{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 25%;
+
+}
+
+#signupformholder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#collapseExample{
+    margin-top: 20px;
+}
+#showSignup,#loginbtnm{
+    margin-top: 20px;
+    margin-inline: 30px;
+}
+#not{
+    margin-inline: 30px;
+}
+#signupbtn,#showLogin{
+    margin-top: 20px;
 }
