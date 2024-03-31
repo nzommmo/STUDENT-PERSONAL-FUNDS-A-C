@@ -5,6 +5,7 @@ function openNav() {
     document.getElementsByClassName("content")[0].style.marginLeft = "250px";
 }
 
+
 function closeNav() {
     document.getElementById("mySidebar").style.width = "0";
     document.getElementById("mySidebar").style.display = "none";
@@ -24,12 +25,19 @@ function showDetails() {
 document.getElementById("view").addEventListener("click", showDetails);
 
 
-// Wait for the DOM content to be loaded
 document.addEventListener("DOMContentLoaded", function() {
     // Hide all content cards
     hideAllContent();
     // Show the account details card by default
     document.getElementById("accountdetails").style.display = "block";
+    
+    // Add event listener to close the sidebar when content area is clicked
+    document.getElementsByClassName("content")[0].addEventListener("click", function() {
+        var sidebarWidth = document.getElementById("mySidebar").style.width;
+        if (sidebarWidth === "250px") {
+            closeNav();
+        }
+    });
 });
 
 // Deposit link clicked
@@ -75,3 +83,10 @@ function hideAllContent() {
 }
 
 console.log("hello")
+
+
+    // After 3 seconds, remove the alert message
+    setTimeout(function() {
+        document.getElementById('depositalert').style.display = 'none';
+    }, 3000); 
+

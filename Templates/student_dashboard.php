@@ -119,7 +119,7 @@ if(isset($_SESSION['user_id'])) {
     <a href="#" id="accountdetailsbtn">Home</a>
     <a href="#" id="depositbtn">Deposit</a>
     <a href="#" id="withdrawbtn">Withdraw</a>
-    <a href="#" id="transactbtn">Transact</a>
+    <a href="vendors.php" id="transactbtn">Transact</a>
     <a href="#" id="historybtn">Transact History</a>    
     <a href="logout.php">Logout</a>    
         
@@ -144,10 +144,8 @@ if(isset($_SESSION['user_id'])) {
 </div>
 </div>
 <!-- Deposit -->
-<div class="content" id="depositcard">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <?php
+<div id="depositalert" style="width: 200px">
+<?php
             // Start the session
             session_start();
 
@@ -158,6 +156,13 @@ if(isset($_SESSION['user_id'])) {
                 unset($_SESSION['message']);
             }
             ?>
+
+</div>
+<div class="content" id="depositcard">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            
+            
             <form id="depositForm" action="deposit.php" method="POST">
                 <div class="mb-3">
                     <input type="text" class="form-control" id="depositInput" name="amount" aria-describedby="depositHelp" placeholder="Enter amount to deposit">
@@ -169,10 +174,8 @@ if(isset($_SESSION['user_id'])) {
 </div>
 
 <!-- Withdraw -->
-<div class="content" id="withdrawcard">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <?php
+<div id="withdrawalert" style="width: 200px">
+<?php
             // Start the session
             session_start();
 
@@ -183,6 +186,12 @@ if(isset($_SESSION['user_id'])) {
                 unset($_SESSION['message']);
             }
             ?>
+
+
+</div>
+<div class="content" id="withdrawcard">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
             <form id="depositForm" action="withdraw.php" method="POST">
                 <div class="mb-3">
                     <input type="text" class="form-control" id="depositInput" name="amount" aria-describedby="depositHelp" placeholder="Enter amount to withdraw">
@@ -203,19 +212,6 @@ if(isset($_SESSION['user_id'])) {
         </div>
     </div>
 </div>
-
-<!-- transactions history -->
-<div class="content" id="vendors" style="margin-top: 0;">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title"><?php echo $vendorName; ?></h5>
-                    <p class="card-text"><?php echo $vendorLocation; ?></p>
-                    <a href="#" class="btn btn-primary">View Products</a>
-                </div>
-            </div>
-        </div>
-
-
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
