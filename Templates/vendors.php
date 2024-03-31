@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Vendors</title>
   </head>
   <body>
 <!-- Update Vendors  -->
@@ -39,7 +39,7 @@
                     <h5 class="card-title"><?php echo $vendorName; ?></h5>
                     <p class="card-text"><?php echo $vendorLocation; ?></p>
                     <!-- Update Button -->
-                    <a href="vendoritems.php?id=<?php echo $vendorId; ?>" class="btn btn-primary">View Products</a>
+                    <a href="vendoritems.php?id=1<?php echo $vendorId; ?>" class="btn btn-primary">View Products</a>
                     <!-- View Products Button (Optional) -->
                 </div>
             </div>

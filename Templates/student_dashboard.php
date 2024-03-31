@@ -119,7 +119,7 @@ if(isset($_SESSION['user_id'])) {
     <a href="#" id="accountdetailsbtn">Home</a>
     <a href="#" id="depositbtn">Deposit</a>
     <a href="#" id="withdrawbtn">Withdraw</a>
-    <a href="vendors.php" id="transactbtn">Transact</a>
+    <a href="vendors.php" id="transactbtn" target="_blank">Transact</a>
     <a href="#" id="historybtn">Transact History</a>    
     <a href="logout.php">Logout</a>    
         
