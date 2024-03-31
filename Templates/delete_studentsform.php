@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Delete Vendor!</title>
+    <title>Delete User!</title>
   </head>
   <body>
     <!-- Delete Vendors -->
@@ -40,6 +40,7 @@
                                         <p class="card-text"><?php echo $user_id; ?></p>
                                         <!-- Update Button -->
                                         <form method="POST" action="delete_student.php">
+                                        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                                             <input type="hidden" name="firstname" value="<?php echo $firstname; ?>">
                                             <button type="submit" class="btn btn-danger" name="delete">Delete</button>
                                             
@@ -49,7 +50,7 @@
                             <?php
                         }
                     } else {
-                        echo "<div class='col'>No vendors found.</div>";
+                        echo "<div class='col'>No Users found.</div>";
                     }
 
                     // Close database connection
