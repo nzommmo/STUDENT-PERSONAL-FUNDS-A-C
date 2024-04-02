@@ -56,4 +56,7 @@ GitHub: nzommmo<br>
 ## LivePreview
 http://mapesasystem.infinityfreeapp.com/STUDENT-PERSONAL-FUNDS-A-C/index.html
 
+## Pitch Deck Presentation
+https://docs.google.com/presentation/d/1OYA6KqEDMKUiqw1B5GN6aAwpw7tvx_fABM3pTiYBcB8/edit?usp=sharing
+
 
