@@ -46,13 +46,40 @@ if(isset($_POST['add_to_cart'])) {
     $itemPrice = $_POST['item_price'];
     $vendorId = $_POST['vendor_id'];
 
-    // Add item to cart session variable
-    $_SESSION['cart'][] = [
-        'item_id' => $itemId,
-        'item_name' => $itemName,
-        'item_price' => $itemPrice,
-        'vendor_id' => $vendorId
-    ];
+    // Check if item already exists in cart
+    $itemExists = false;
+    foreach ($_SESSION['cart'] as $key => $cartItem) {
+        if ($cartItem['item_id'] == $itemId) {
+            // Item already exists, update its quantity
+            $_SESSION['cart'][$key]['quantity']++;
+            $itemExists = true;
+            break;
+        }
+    }
+
+    // If item doesn't exist, add it to cart
+    if (!$itemExists) {
+        // Add item to cart session variable
+        $_SESSION['cart'][] = [
+            'item_id' => $itemId,
+            'item_name' => $itemName,
+            'item_price' => $itemPrice,
+            'vendor_id' => $vendorId,
+            'quantity' => 1 // Default quantity is 1 when adding to cart
+        ];
+    }
+
+    // Calculate total quantity and amount in the cart
+    $totalItems = 0;
+    $totalAmount = 0;
+    foreach ($_SESSION['cart'] as $cartItem) {
+        $totalItems += $cartItem['quantity'];
+        $totalAmount += ($cartItem['item_price'] * $cartItem['quantity']);
+    }
+
+    // Set session variables for total quantity and amount
+    $_SESSION['total_items'] = $totalItems;
+    $_SESSION['total_amount'] = $totalAmount;
 
     echo "<script>alert('Item added to cart successfully.');</script>";
     // Redirect to the same page to prevent form resubmission
@@ -73,7 +100,7 @@ if(isset($_POST['add_to_cart'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body id="vendoritems">
-<a href="cart.php" id="cartitems">view items in cart</a>
+<a href="cart.php" id="cartitems">view items in cart (<?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? $_SESSION['total_items'] : 0; ?>)</a>
 <div class="container mt-5">
     <h1><?php echo $vendorName; ?> Items</h1>
     <h3>Location: <?php echo $vendorLocation; ?></h3>

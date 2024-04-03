@@ -206,7 +206,7 @@ if(isset($_SESSION['user_id'])) {
                     <!-- Update Button -->
                     <a href="update_vendor.php?id=<?php echo $vendorId; ?>" class="btn btn-primary">Update</a>
                     <!-- View Products Button (Optional) -->
-                    <a href="#" class="btn btn-secondary">View Products</a>
+                    <a href="vendoritems.php?id=<?php echo $vendorId; ?>" class="btn btn-secondary">View Products</a>
                 </div>
             </div>
         </div>
