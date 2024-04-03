@@ -9,7 +9,8 @@ if (!isset($_SESSION['user_id'])) {
 
 // Check if the cart is empty
 if (empty($_SESSION['cart'])) {
-    echo "Your cart is empty!";
+    $_SESSION['cart_message'] = "Your cart is empty!";
+    header("Location: cart.php");
     exit();
 }
 
@@ -83,9 +84,16 @@ $vendor = $result_vendor->fetch_assoc();
 
     <h3>Total Price to be Paid: <?php echo $totalPrice; ?></h3>
 
-    <!-- You can add a form for payment processing here -->
-                <!-- Checkout button -->
-                <a href="completeorder.php" class="btn btn-primary" id="">Complete Purchase</a>
+    <!-- Display messages -->
+    <?php if (isset($_SESSION['checkout_message'])): ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo $_SESSION['checkout_message']; ?>
+        </div>
+        <?php unset($_SESSION['checkout_message']); ?>
+    <?php endif; ?>
+
+    <!-- Checkout button -->
+    <a href="completeorder.php" class="btn btn-primary" id="">Complete Purchase</a>
 
 </div>
 

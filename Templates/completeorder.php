@@ -71,8 +71,8 @@ $stmt_insert_transaction->close();
 unset($_SESSION['cart']);
 
 // Set success message in session
-$_SESSION['cart_message'] = "Purchase successful! Thank you for shopping with us.";
+$_SESSION['successfull_purchase'] = "Purchase successful! Thank you for shopping with us.";
 
-header("Location: cart.php");
+header("Location: success_checkout.php");
 exit();
 ?>
