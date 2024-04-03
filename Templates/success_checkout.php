@@ -25,7 +25,6 @@
 <body>
 
 <div class="container mt-5">
-    <h1>Success Message</h1>
     <!-- Success message will be displayed here -->
     <div class="success-message" id="successMessage">
         Thank you for your purchase! Redirecting you to the login page...

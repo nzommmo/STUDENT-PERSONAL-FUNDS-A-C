@@ -1,0 +1,43 @@
+/* Default styles */
+.form-container {
+    margin-right: 30px; /* Adjust as needed */
+}
+#signupform {
+    display: none; /* Hide the signup form initially */
+}
+
+/* Media query for screens smaller than 576px (extra small devices) */
+@media (max-width: 575.98px) {
+    .form-container {
+        margin-right: 0; /* Remove margin */
+        margin-bottom: 20px; /* Add some bottom margin */
+    }
+}
+
+/* Media query for screens between 576px and 767.98px (small devices) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .form-container {
+        margin-right: 15px; /* Adjust margin */
+    }
+}
+
+/* Media query for screens between 768px and 991.98px (medium devices) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .form-container {
+        margin-right: 30px; /* Reset margin to default */
+    }
+}
+
+/* Media query for screens between 992px and 1199.98px (large devices) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .form-container {
+        margin-right: 40px; /* Increase margin */
+    }
+}
+
+/* Media query for screens 1200px and larger (extra large devices) */
+@media (min-width: 1200px) {
+    .form-container {
+        margin-right: 50px; /* Increase margin further */
+    }
+}
